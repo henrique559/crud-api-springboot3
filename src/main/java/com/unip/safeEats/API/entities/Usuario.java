@@ -1,12 +1,26 @@
 package com.unip.safeEats.API.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Usuario")
 public class Usuario implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario", nullable = false)
     private Integer idUsuario;
+
+    @Column(name = "nome", length = 50)
     private String nome;
+
+    @Column(name = "email", nullable = false, length = 35)
     private String email;
+
+    @Column(name = "senha", nullable = false, length = 25)
     private String senha;
 
     public Usuario() {
