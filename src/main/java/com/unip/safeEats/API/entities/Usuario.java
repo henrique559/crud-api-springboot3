@@ -11,8 +11,8 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario", nullable = false)
-    private Integer idUsuario;
+    @Column(name = "id_usuario", nullable = false)
+    private Long idUsuario;
 
     @Column(name = "nome", length = 50)
     private String nome;
@@ -26,18 +26,18 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario, String nome, String email, String senha) {
+    public Usuario(Long idUsuario, String nome, String email, String senha) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public Integer getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -77,5 +77,15 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(idUsuario);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
     }
 }

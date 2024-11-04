@@ -1,9 +1,9 @@
 package com.unip.safeEats.API.repositories;
 
-import com.unip.safeEats.API.entities.Endereco;
+import com.unip.safeEats.API.entities.Fornecedor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
+public interface FornecedorRepository extends JpaRepository<Fornecedor, Long> {
 }
