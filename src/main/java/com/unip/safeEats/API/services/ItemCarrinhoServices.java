@@ -18,7 +18,7 @@ public class ItemCarrinhoServices {
         return repository.findAll();
     }
 
-    public ItemCarrinho findById(Long id){
+    public ItemCarrinho findById(Integer id){
         Optional<ItemCarrinho> obj =  repository.findById(id);
         return obj.get();
 

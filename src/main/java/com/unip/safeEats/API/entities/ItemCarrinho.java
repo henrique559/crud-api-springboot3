@@ -7,58 +7,62 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+
 @Entity
-@Table(name = "ItemCarrinho")
+@Table(name = "item_carrinho")
 public class ItemCarrinho implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_item_carrinho;
 
-    @ManyToMany(mappedBy = "item_carrinho")
-    private List<Produto> id_produto;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_carrinho_id")
+    private Integer itemCarrinhoID;
 
-    @Column(name = "id_usuario")
-    private Usuario id_usuario;
+    @OneToMany
+    @JoinColumn(name = "produto_id")
+    private List<Produto> produtos;
 
-    @Column(name = "quantidade")
+    @OneToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "carrinho_id")
+    private Carrinho carrinho;
+
     private Integer quantidade;
-
-    @Column(name = "preco_unitario")
     private Double preco_unitario;
-
-    @Column(name = "subtotal")
     private Double subtotal;
 
     public ItemCarrinho() {
     }
 
-    public ItemCarrinho(Long id_item_carrinho, List<Produto> id_produto, Usuario id_usuario, Integer quantidade, Double preco_unitario, Double subtotal) {
-        this.id_item_carrinho = id_item_carrinho;
-        this.id_produto = id_produto;
-        this.id_usuario = id_usuario;
+    public ItemCarrinho(Integer itemCarrinhoID, List<Produto> produtos, Carrinho carrinho, Cliente usuario, Integer quantidade, Double preco_unitario, Double subtotal) {
+        this.itemCarrinhoID = itemCarrinhoID;
+        this.carrinho = carrinho;
+        this.produtos = produtos;
+        this.usuario = usuario;
         this.quantidade = quantidade;
         this.preco_unitario = preco_unitario;
         this.subtotal = subtotal;
     }
 
-    public Long getId_item_carrinho() {
-        return id_item_carrinho;
+    public Integer getId_item_carrinho() {
+        return itemCarrinhoID;
     }
 
-    public void setId_item_carrinho(Long id_item_carrinho) {
-        this.id_item_carrinho = id_item_carrinho;
+    public void setId_item_carrinho(Integer itemCarrinhoID) {
+        this.itemCarrinhoID = itemCarrinhoID;
     }
 
     public List<Produto> getId_produto() {
-        return id_produto;
+        return produtos;
     }
 
-    public Usuario getId_usuario() {
-        return id_usuario;
+    public Cliente getId_usuario() {
+        return usuario;
     }
 
-    public void setId_usuario(Usuario id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario(Cliente usuario) {
+        this.usuario = usuario;
     }
 
     public Integer getQuantidade() {
@@ -85,25 +89,57 @@ public class ItemCarrinho implements Serializable {
         this.subtotal = subtotal;
     }
 
+    public Integer getItemCarrinhoID() {
+        return itemCarrinhoID;
+    }
+
+    public void setItemCarrinhoID(Integer itemCarrinhoID) {
+        this.itemCarrinhoID = itemCarrinhoID;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    public Cliente getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Cliente usuario) {
+        this.usuario = usuario;
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ItemCarrinho that = (ItemCarrinho) o;
-        return Objects.equals(id_item_carrinho, that.id_item_carrinho);
+        return Objects.equals(itemCarrinhoID, that.itemCarrinhoID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_item_carrinho);
+        return Objects.hashCode(itemCarrinhoID);
     }
 
     @Override
     public String toString() {
         return "ItemCarrinho{" +
-                "id_item_carrinho=" + id_item_carrinho +
-                ", id_produto=" + id_produto +
-                ", id_usuario=" + id_usuario +
+                "itemCarrinhoID=" + itemCarrinhoID +
+                ", produtos=" + produtos +
+                ", usuario=" + usuario +
                 ", quantidade=" + quantidade +
                 ", preco_unitario=" + preco_unitario +
                 ", subtotal=" + subtotal +

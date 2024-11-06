@@ -5,48 +5,48 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 @Entity
-@Table(name = "Administrador")
+@Table(name = "administrador")
 public class Administrador implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_administrador")
-    private Long id_administrador;
 
-    @JoinColumn(name = "id_usuario")
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "administrador_id")
+    private Integer administradorID;
+
+
     @OneToOne
-    private Usuario id_usuario;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuarioID;
 
-    @Column(name = "cpf")
     private String cpf;
+    private String registro_numero;
 
-    @Column(name = "numRegistro")
-    private String numRegistro;
-
-    public Administrador(Long id_administrador, Usuario id_usuario, String cpf, String numRegistro) {
-        this.id_administrador = id_administrador;
-        this.id_usuario = id_usuario;
+    public Administrador(Integer administradorID, Usuario usuarioID, String cpf, String registro_numero) {
+        this.administradorID = administradorID;
+        this.usuarioID = usuarioID;
         this.cpf = cpf;
-        this.numRegistro = numRegistro;
+        this.registro_numero = registro_numero;
     }
 
     public Administrador() {
     }
 
-    public Long getId_administrador() {
-        return id_administrador;
+    public Integer getId_administrador() {
+        return administradorID;
     }
 
-    public void setId_administrador(Long id_administrador) {
-        this.id_administrador = id_administrador;
+    public void setId_administrador(Integer administradorID) {
+        this.administradorID = administradorID;
     }
 
     public Usuario getId_usuario() {
-        return id_usuario;
+        return usuarioID;
     }
 
-    public void setId_usuario(Usuario id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario(Usuario usuarioID) {
+        this.usuarioID = usuarioID;
     }
 
     public String getCpf() {
@@ -58,20 +58,20 @@ public class Administrador implements Serializable {
     }
 
     public String getNumRegistro() {
-        return numRegistro;
+        return registro_numero;
     }
 
-    public void setNumRegistro(String numRegistro) {
-        this.numRegistro = numRegistro;
+    public void setNumRegistro(String registro_numero) {
+        this.registro_numero = registro_numero;
     }
 
     @Override
     public String toString() {
         return "Administrador{" +
-                "id_administrador=" + id_administrador +
-                ", id_usuario=" + id_usuario +
+                "administradorID=" + administradorID +
+                ", usuarioID=" + usuarioID +
                 ", cpf='" + cpf + '\'' +
-                ", numRegistro='" + numRegistro + '\'' +
+                ", registro_numero='" + registro_numero + '\'' +
                 '}';
     }
 
@@ -80,11 +80,11 @@ public class Administrador implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Administrador that = (Administrador) o;
-        return Objects.equals(id_administrador, that.id_administrador);
+        return Objects.equals(administradorID, that.administradorID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_administrador);
+        return Objects.hashCode(administradorID);
     }
 }

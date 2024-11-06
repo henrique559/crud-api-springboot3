@@ -6,58 +6,49 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 @Entity
-@Table(name = "Endereco")
+@Table(name = "endereco")
 public class Endereco implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_endereco")
-    private Long idEndereco;
-
-    @Column(name = "rua", length = 70)
-    private String rua;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "endereco_id")
+    private Integer enderecoID;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "fk_id_cliente")
-    private Cliente fk_id_cliente;
+    @JoinColumn(name = "usuario_id")
+    private Cliente clienteID;
 
-    @Column(name = "numero", length = 4)
+    private String rua;
     private String numero;
-
-    @Column(name = "complemento", length = 20)
     private String complemento;
-
-    @Column(name = "cep", length = 8)
     private String cep;
 
     public Endereco() {
     }
 
-    public Endereco(Long idEndereco, String rua, Cliente fk_id_cliente, String numero, String complemento, String cep) {
-        this.idEndereco = idEndereco;
+    public Endereco(Integer enderecoID, String rua, Cliente clienteID, String numero, String complemento, String cep) {
+        this.enderecoID = enderecoID;
         this.rua = rua;
-        this.fk_id_cliente = fk_id_cliente;
+        this.clienteID = clienteID;
         this.numero = numero;
         this.complemento = complemento;
         this.cep = cep;
     }
 
     public Cliente getFk_id_cliente() {
-        return fk_id_cliente;
+        return clienteID;
     }
 
-    public void setFk_id_cliente(Cliente fk_id_cliente) {
-        this.fk_id_cliente = fk_id_cliente;
+    public void setFk_id_cliente(Cliente clienteID) {
+        this.clienteID = clienteID;
     }
 
-    public Long getIdEndereco() {
-        return idEndereco;
+    public Integer getIdEndereco() {
+        return enderecoID;
     }
 
-    public void setIdEndereco(Long idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setIdEndereco(Integer enderecoID) {
+        this.enderecoID = enderecoID;
     }
 
     public String getRua() {
@@ -97,18 +88,18 @@ public class Endereco implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Endereco endereco = (Endereco) o;
-        return Objects.equals(idEndereco, endereco.idEndereco);
+        return Objects.equals(enderecoID, endereco.enderecoID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(idEndereco);
+        return Objects.hashCode(enderecoID);
     }
 
     @Override
     public String toString() {
         return "Endereco{" +
-                "idEndereco=" + idEndereco +
+                "enderecoID=" + enderecoID +
                 ", rua='" + rua + '\'' +
                 ", numero='" + numero + '\'' +
                 ", complemento='" + complemento + '\'' +

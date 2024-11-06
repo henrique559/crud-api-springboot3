@@ -6,39 +6,36 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
+    @Column(name = "usuario_id")
+    private Integer usuarioID;
 
-    @Column(name = "nome", length = 50)
     private String nome;
 
-    @Column(name = "email", nullable = false, length = 35)
     private String email;
 
-    @Column(name = "senha", nullable = false, length = 25)
     private String senha;
 
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nome, String email, String senha) {
-        this.idUsuario = idUsuario;
+    public Usuario(Integer usuarioID, String nome, String email, String senha) {
+        this.usuarioID = usuarioID;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Integer getIdUsuario() {
+        return usuarioID;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUsuario(Integer usuarioID) {
+        this.usuarioID = usuarioID;
     }
 
     public String getNome() {
@@ -71,18 +68,18 @@ public class Usuario implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(idUsuario, usuario.idUsuario);
+        return Objects.equals(usuarioID, usuario.usuarioID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(idUsuario);
+        return Objects.hashCode(usuarioID);
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "idUsuario=" + idUsuario +
+                "usuarioID=" + usuarioID +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +

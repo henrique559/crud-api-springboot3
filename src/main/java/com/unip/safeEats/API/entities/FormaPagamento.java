@@ -6,41 +6,41 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FormaPagamento")
+@Table(name = "forma_pagamento")
 public class FormaPagamento implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_forma_pagamento;
 
-    @Column(name = "nome_forma_pagamento", length = 20, nullable = false)
-    private String nome_forma_pagamento;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "forma_pagamento_id")
+    private Integer formaPagamentoID;
 
-    @Column(name = "descricao")
+    @Column(name = "nome")
+    private String nomeFormaPagamento;
+
     private String descricao;
 
     public FormaPagamento() {
     }
 
-    public FormaPagamento(Long id_forma_pagamento, String nome_forma_pagamento, String descricao) {
-        this.id_forma_pagamento = id_forma_pagamento;
-        this.nome_forma_pagamento = nome_forma_pagamento;
+    public FormaPagamento(Integer formaPagamentoID, String nomeFormaPagamento, String descricao) {
+        this.formaPagamentoID = formaPagamentoID;
+        this.nomeFormaPagamento = nomeFormaPagamento;
         this.descricao = descricao;
     }
 
-    public Long getId_forma_pagamento() {
-        return id_forma_pagamento;
+    public Integer getId_forma_pagamento() {
+        return formaPagamentoID;
     }
 
-    public void setId_forma_pagamento(Long id_forma_pagamento) {
-        this.id_forma_pagamento = id_forma_pagamento;
+    public void setId_forma_pagamento(Integer formaPagamentoID) {
+        this.formaPagamentoID = formaPagamentoID;
     }
 
     public String getNome_forma_pagamento() {
-        return nome_forma_pagamento;
+        return nomeFormaPagamento;
     }
 
-    public void setNome_forma_pagamento(String nome_forma_pagamento) {
-        this.nome_forma_pagamento = nome_forma_pagamento;
+    public void setNome_forma_pagamento(String nomeFormaPagamento) {
+        this.nomeFormaPagamento = nomeFormaPagamento;
     }
 
     public String getDescricao() {
@@ -57,19 +57,19 @@ public class FormaPagamento implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FormaPagamento that = (FormaPagamento) o;
-        return Objects.equals(id_forma_pagamento, that.id_forma_pagamento);
+        return Objects.equals(formaPagamentoID, that.formaPagamentoID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_forma_pagamento);
+        return Objects.hashCode(formaPagamentoID);
     }
 
     @Override
     public String toString() {
         return "FormaPagamento{" +
-                "id_forma_pagamento=" + id_forma_pagamento +
-                ", nome_forma_pagamento='" + nome_forma_pagamento + '\'' +
+                "formaPagamentoID=" + formaPagamentoID +
+                ", nomeFormaPagamento='" + nomeFormaPagamento + '\'' +
                 ", descricao='" + descricao + '\'' +
                 '}';
     }

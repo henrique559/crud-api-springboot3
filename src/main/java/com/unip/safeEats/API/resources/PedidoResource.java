@@ -1,9 +1,7 @@
 package com.unip.safeEats.API.resources;
 
-import com.unip.safeEats.API.entities.Cliente;
-import com.unip.safeEats.API.entities.Cliente;
-import com.unip.safeEats.API.entities.Cliente;
-import com.unip.safeEats.API.services.ClienteServices;
+import com.unip.safeEats.API.entities.Pedido;
+import com.unip.safeEats.API.services.PedidoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,31 +9,30 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteResource {
+@RequestMapping(value = "/pedido")
+public class PedidoResource {
 
     @Autowired
-     ClienteServices service;
+    PedidoServices service;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> findAll(){
-        List<Cliente> clientes = service.findAll();
-        return ResponseEntity.ok().body(clientes);
+    public ResponseEntity<List<Pedido>> findAll(){
+        List<Pedido> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Cliente> findById(@PathVariable Integer id){
-        Cliente usuario = service.findById(id);
+    public ResponseEntity<Pedido> findById(@PathVariable Integer id){
+        Pedido usuario = service.findById(id);
         return ResponseEntity.ok().body(usuario);
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> insert(@RequestBody Cliente obj){
+    public ResponseEntity<Pedido> insert(@RequestBody Pedido obj){
         obj = service.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_cliente()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getCod_pedido()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
 
@@ -46,10 +43,10 @@ public class ClienteResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> update(@PathVariable Integer id, @RequestBody Cliente obj){
+    public ResponseEntity<Pedido> update(@PathVariable Integer id, @RequestBody Pedido obj){
         obj = service.update(id, obj);
         return ResponseEntity.ok().body(obj);
-
     }
-
 }
+
+

@@ -5,46 +5,47 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 @Entity
-@Table(name = "FormaEnvio")
+@Table(name = "forma_envio")
 public class FormaEnvio implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_forma_envio;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "forma_envio_id")
+    private Integer formaEnvioID;
 
-    @Column(name = "nome_forma_envio", length = 50)
-    private String nome_forma_envio;
+    @Column(name = "nome")
+    private String nomeFormaEnvio;
 
-    public FormaEnvio(Long id_forma_envio, String nome_forma_envio) {
-        this.id_forma_envio = id_forma_envio;
-        this.nome_forma_envio = nome_forma_envio;
+    public FormaEnvio(Integer formaEnvioID, String nomeFormaEnvio) {
+        this.formaEnvioID = formaEnvioID;
+        this.nomeFormaEnvio = nomeFormaEnvio;
     }
 
     public FormaEnvio() {
     }
 
-    public Long getId_forma_envio() {
-        return id_forma_envio;
+    public Integer getId_forma_envio() {
+        return formaEnvioID;
     }
 
-    public void setId_forma_envio(Long id_forma_envio) {
-        this.id_forma_envio = id_forma_envio;
+    public void setId_forma_envio(Integer formaEnvioID) {
+        this.formaEnvioID = formaEnvioID;
     }
 
     public String getNome_forma_envio() {
-        return nome_forma_envio;
+        return nomeFormaEnvio;
     }
 
-    public void setNome_forma_envio(String nome_forma_envio) {
-        this.nome_forma_envio = nome_forma_envio;
+    public void setNome_forma_envio(String nomeFormaEnvio) {
+        this.nomeFormaEnvio = nomeFormaEnvio;
     }
 
-    @Override
+
     public String toString() {
         return "FormaEnvio{" +
-                "id_forma_envio=" + id_forma_envio +
-                ", nome_forma_envio='" + nome_forma_envio + '\'' +
+                "formaEnvioID=" + formaEnvioID +
+                ", nomeFormaEnvio='" + nomeFormaEnvio + '\'' +
                 '}';
     }
 
@@ -53,11 +54,11 @@ public class FormaEnvio implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FormaEnvio that = (FormaEnvio) o;
-        return Objects.equals(id_forma_envio, that.id_forma_envio);
+        return Objects.equals(formaEnvioID, that.formaEnvioID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_forma_envio);
+        return Objects.hashCode(formaEnvioID);
     }
 }

@@ -25,7 +25,7 @@ public class ItemCarrinhoResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ItemCarrinho> findById(@PathVariable Long id){
+    public ResponseEntity<ItemCarrinho> findById(@PathVariable Integer id){
         ItemCarrinho item_carrinho = service.findById(id);
         return ResponseEntity.ok().body(item_carrinho);
     }

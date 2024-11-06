@@ -3,69 +3,54 @@ package com.unip.safeEats.API.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Table(name = "Fornecedor")
+@Table(name = "fornecedor")
 public class Fornecedor implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_fornecedor")
-    private Long id_fornecedor;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "fornecedor_id")
+    private Integer fornecedorID;
 
     @OneToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario id_usuario;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuarioID;
 
-    @Column(name = "cnpj", length = 14)
+    @OneToMany
+    @JoinColumn(name = "endereco_id")
+    private List<Endereco> enderecos = new ArrayList<>();
+
     private String cnpj;
-
-    @Column(name = "tipo_produto", length = 15)
     private String tipo_produto;
-
-    @Column(name = "razao_social", length = 50)
     private String razao_social;
-
-    @Column(name = "nome_fantasia", length = 35)
     private String nome_fantasia;
-
-    @ManyToMany(mappedBy = "fornecedores")
-    private Set<Produto> produtos = new HashSet<>();
 
     public Fornecedor() {
     }
 
-    public Fornecedor(Long id_fornecedor, Usuario id_usuario, String cnpj, String tipo_produto, String razao_social, String nome_fantasia, Set<Produto> produtos) {
-        this.id_fornecedor = id_fornecedor;
-        this.id_usuario = id_usuario;
+    public Fornecedor(Integer fornecedorID, Usuario usuarioID, String cnpj, String tipo_produto, String razao_social, String nome_fantasia) {
+        this.fornecedorID = fornecedorID;
+        this.usuarioID = usuarioID;
         this.cnpj = cnpj;
         this.tipo_produto = tipo_produto;
         this.razao_social = razao_social;
         this.nome_fantasia = nome_fantasia;
-        this.produtos = produtos;
     }
 
-    public Set<Produto> getProdutos() {
-        return produtos;
+    public Integer getId_fornecedor() {
+        return fornecedorID;
     }
 
-    public Long getId_fornecedor() {
-        return id_fornecedor;
-    }
-
-    public void setId_fornecedor(Long id_fornecedor) {
-        this.id_fornecedor = id_fornecedor;
+    public void setId_fornecedor(Integer fornecedorID) {
+        this.fornecedorID = fornecedorID;
     }
 
     public Usuario getId_usuario() {
-        return id_usuario;
+        return usuarioID;
     }
 
-    public void setId_usuario(Usuario id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario(Usuario usuarioID) {
+        this.usuarioID = usuarioID;
     }
 
     public String getCnpj() {
@@ -103,8 +88,8 @@ public class Fornecedor implements Serializable {
     @Override
     public String toString() {
         return "Fornecedor{" +
-                "id_fornecedor=" + id_fornecedor +
-                ", id_usuario=" + id_usuario +
+                "fornecedorID=" + fornecedorID +
+                ", usuarioID=" + usuarioID +
                 ", cnpj='" + cnpj + '\'' +
                 ", tipo_produto='" + tipo_produto + '\'' +
                 ", razao_social='" + razao_social + '\'' +
@@ -117,11 +102,11 @@ public class Fornecedor implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fornecedor that = (Fornecedor) o;
-        return Objects.equals(id_fornecedor, that.id_fornecedor);
+        return Objects.equals(fornecedorID, that.fornecedorID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_fornecedor);
+        return Objects.hashCode(fornecedorID);
     }
 }

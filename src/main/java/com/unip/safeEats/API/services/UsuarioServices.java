@@ -20,10 +20,30 @@ public class UsuarioServices {
         return repository.findAll();
     }
 
-    public Usuario findById(Long id){
+    public Usuario findById(Integer id){
         Optional<Usuario> obj =  repository.findById(id);
         return obj.get();
 
+    }
+
+    public Usuario insert(Usuario obj){
+       return repository.save(obj);
+    }
+
+    public void delete(Integer id){
+         repository.deleteById(id);
+    }
+
+    public Usuario update(Integer id, Usuario obj){
+        Usuario entity = repository.getReferenceById(id);
+        updateData(entity, obj);
+        return repository.save(entity);
+    }
+
+    public void updateData(Usuario entity, Usuario obj) {
+        entity.setNome(obj.getNome());
+        entity.setEmail(obj.getEmail());
+        entity.setSenha(obj.getSenha());
     }
 
 }

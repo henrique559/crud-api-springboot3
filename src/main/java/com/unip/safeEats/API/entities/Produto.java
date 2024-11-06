@@ -5,43 +5,26 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
+
 @Entity
-@Table(name = "Produto")
+@Table(name = "produto")
 public class Produto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_produto;
 
-    @Column(name = "nome", length = 100)
-    private String nome;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "produto_id")
+    private Integer produtoID;
 
-    @Column(name = "descricao")
-    private String descricao;
-
-    @Column(name = "preco")
-    private Double preco;
-
-    @Column(name = "quantidade")
-    private Long quantidade;
-
-    @ManyToMany
-    @JoinTable(
-            name = "tb_produtos_fornecedores",
-            joinColumns = @JoinColumn(name = "id_produto"),
-            inverseJoinColumns = @JoinColumn(name = "id_fornecedor")
-    )
+    @OneToMany
+    @JoinColumn(name = "fornecedor_id")
     private Set<Fornecedor> fornecedores = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "tb_produtos_itemcarrinho",
-            joinColumns = @JoinColumn(name = "id_produto"),
-            inverseJoinColumns = @JoinColumn(name = "id_item_carrinho")
-    )
-    private List<ItemCarrinho> item_carrinho = new ArrayList<>();
+    private String nome;
+    private String descricao;
+    private Double preco;
+    private Integer quantidade;
 
-    public Produto(Long id_produto, String nome, String descricao, Double preco, Long quantidade, Set<Fornecedor> fornecedores) {
-        this.id_produto = id_produto;
+    public Produto(Integer produtoID, String nome, String descricao, Double preco, Integer quantidade, Set<Fornecedor> fornecedores) {
+        this.produtoID = produtoID;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -52,12 +35,12 @@ public class Produto {
     public Produto() {
     }
 
-    public Long getId_produto() {
-        return id_produto;
+    public Integer getId_produto() {
+        return produtoID;
     }
 
-    public void setId_produto(Long id_produto) {
-        this.id_produto = id_produto;
+    public void setId_produto(Integer produtoID) {
+        this.produtoID = produtoID;
     }
 
     public String getNome() {
@@ -84,11 +67,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public Long getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Long quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -101,18 +84,18 @@ public class Produto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id_produto, produto.id_produto);
+        return Objects.equals(produtoID, produto.produtoID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_produto);
+        return Objects.hashCode(produtoID);
     }
 
     @Override
     public String toString() {
         return "Produto{" +
-                "id_produto=" + id_produto +
+                "produtoID=" + produtoID +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", preco=" + preco +

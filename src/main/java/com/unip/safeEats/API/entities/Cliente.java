@@ -9,56 +9,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 public class Cliente implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente")
-    private Long id_cliente;
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cliente_id")
+    private Integer clienteID;
 
     @OneToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario id_usuario;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    @OneToMany(mappedBy = "fk_id_cliente")
-    private List<Endereco> id_endereco = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "endereco_id")
+    private List<Endereco> endereco = new ArrayList<>();
 
-    @Column(name = "cpf")
     private String cpf;
-
-    @Column(name = "telefone")
     private String telefone;
 
     public Cliente() {
     }
 
-    public Cliente(Long id_cliente, Usuario id_usuario, List<Endereco> id_endereco, String cpf, String telefone) {
-        this.id_cliente = id_cliente;
-        this.id_usuario = id_usuario;
-        this.id_endereco = id_endereco;
+    public Cliente(Integer clienteID, Usuario usuario, List<Endereco> endereco, String cpf, String telefone) {
+        this.clienteID = clienteID;
+        this.usuario = usuario;
+        this.endereco = endereco;
         this.cpf = cpf;
         this.telefone = telefone;
     }
 
-    public Long getId_cliente() {
-        return id_cliente;
+    public Integer getId_cliente() {
+        return clienteID;
     }
 
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setId_cliente(Integer clienteID) {
+        this.clienteID = clienteID;
     }
 
     public Usuario getId_usuario() {
-        return id_usuario;
+        return usuario;
     }
 
-    public void setId_usuario(Usuario id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public List<Endereco> getId_endereco() {
-        return id_endereco;
+        return endereco;
     }
 
     public String getCpf() {
@@ -80,9 +80,9 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "Cliente{" +
-                "id_cliente=" + id_cliente +
-                ", id_usuario=" + id_usuario +
-                ", id_endereco=" + id_endereco +
+                "clienteID=" + clienteID +
+                ", usuario=" + usuario +
+                ", endereco=" + endereco +
                 ", cpf='" + cpf + '\'' +
                 ", telefone='" + telefone + '\'' +
                 '}';
@@ -93,11 +93,11 @@ public class Cliente implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id_cliente, cliente.id_cliente);
+        return Objects.equals(clienteID, cliente.clienteID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id_cliente);
+        return Objects.hashCode(clienteID);
     }
 }
